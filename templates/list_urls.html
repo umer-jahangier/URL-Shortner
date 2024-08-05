@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>All Shortened URLs</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>All Shortened URLs</h1>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Short URL</th>
+            <th>Original URL</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for short_url, name, original_url in urls %}
+          <tr>
+            <td>{{ name }}</td>
+            <td>
+              <a
+                target="_blank"
+                href="{{ url_for('redirect_to_url', short_url=short_url) }}"
+                >{{ request.host_url }}{{ short_url }}</a
+              >
+            </td>
+            <td>
+              <a target="_blank" href="{{ original_url }}"
+                >{{ original_url }}</a
+              >
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <br />
+      <a href="{{ url_for('index') }}">
+        <button>Back to Home</button>
+      </a>
+    </div>
+  </body>
+</html>

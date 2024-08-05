@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>URL Shortener</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <h1>URL Shortener</h1>
+      <form method="post">
+        <label for="name">Name:</label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          required
+          placeholder="Give a specific name to shortened url for identification"
+        />
+        <label for="original_url">Enter URL:</label>
+        <input
+          type="url"
+          id="original_url"
+          name="original_url"
+          required
+          placeholder="Enter Original URL"
+        />
+        <button type="submit">Shorten</button>
+      </form>
+      {% if error_message %}
+      <div class="error">{{ error_message }}</div>
+      {% endif %}
+      <div class="view-urls">
+        <a href="{{ url_for('list_urls') }}">
+          <button>View All Shortened URLs</button>
+        </a>
+      </div>
+    </div>
+  </body>
+</html>
